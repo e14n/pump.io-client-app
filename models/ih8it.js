@@ -1,4 +1,4 @@
-// pumplive.js
+// ih8it.js
 //
 // data object representing the app itself
 //
@@ -16,7 +16,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-var PumpLive = {
+var ih8it = {
 
     name: null,
 
@@ -45,4 +45,4 @@ var PumpLive = {
     }
 };
 
-module.exports = PumpLive;
+module.exports = ih8it;

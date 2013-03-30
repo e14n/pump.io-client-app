@@ -23,14 +23,14 @@ var wf = require("webfinger"),
     User = require("../models/user"),
     Host = require("../models/host"),
     RequestToken = require("../models/requesttoken"),
-    PumpLive = require("../models/pumplive");
+    ih8it = require("../models/ih8it");
 
 exports.hostmeta = function(req, res) {
     res.json({
         links: [
             {
                 rel: "dialback",
-                href: PumpLive.url("/dialback")
+                href: ih8it.url("/dialback")
             }
         ]
     });

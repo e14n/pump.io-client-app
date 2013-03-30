@@ -34,7 +34,7 @@ var fs = require("fs"),
     Host = require("./models/host"),
     HostCount = require("./models/hostcount"),
     TotalCount = require("./models/totalcount"),
-    PumpLive = require("./models/pumplive"),
+    ih8it = require("./models/ih8it"),
     Updater = require("./lib/updater"),
     config,
     defaults = {
@@ -47,15 +47,15 @@ var fs = require("fs"),
     },
     log,
     logParams = {
-        name: "pumplive",
+        name: "ih8it",
         serializers: {
             req: Logger.stdSerializers.req,
             res: Logger.stdSerializers.res
         }
     };
 
-if (fs.existsSync("/etc/pumplive.json")) {
-    config = _.defaults(JSON.parse(fs.readFileSync("/etc/pumplive.json")),
+if (fs.existsSync("/etc/ih8it.json")) {
+    config = _.defaults(JSON.parse(fs.readFileSync("/etc/ih8it.json")),
                         defaults);
 } else {
     config = defaults;
@@ -75,7 +75,7 @@ log.info("Initializing pump live");
 
 if (!config.params) {
     if (config.driver == "disk") {
-        config.params = {dir: "/var/lib/pumplive/"};
+        config.params = {dir: "/var/lib/ih8it/"};
     } else {
         config.params = {};
     }
@@ -250,7 +250,7 @@ async.waterfall([
             hostname: config.hostname,
             app: app,
             bank: db,
-            userAgent: "PumpLive/0.1.0"
+            userAgent: "ih8it/0.1.0"
         });
 
         // Configure this global object
@@ -262,13 +262,13 @@ async.waterfall([
         log.info({name: config.name, 
                   description: config.description, 
                   hostname: config.hostname},
-                 "Initializing PumpLive object");
+                 "Initializing ih8it object");
 
-        PumpLive.name        = config.name;
-        PumpLive.description = config.description;
-        PumpLive.hostname    = config.hostname;
+        ih8it.name        = config.name;
+        ih8it.description = config.description;
+        ih8it.hostname    = config.hostname;
 
-        PumpLive.protocol = (config.key) ? "https" : "http";
+        ih8it.protocol = (config.key) ? "https" : "http";
 
         // Let Web stuff get to config
 
