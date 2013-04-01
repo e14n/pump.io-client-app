@@ -248,6 +248,19 @@ async.waterfall([
         app.get('/authorized/:hostname', routes.authorized);
         app.get('/.well-known/host-meta.json', routes.hostmeta);
 
+        // Configure the service object
+
+        log.info({name: config.name, 
+                  description: config.description, 
+                  hostname: config.hostname},
+                 "Initializing ih8it object");
+
+        ih8it.name        = config.name;
+        ih8it.description = config.description;
+        ih8it.hostname    = config.hostname;
+
+        ih8it.protocol = (config.key) ? "https" : "http";
+
         // Create a dialback client
 
         log.info("Initializing dialback client");
@@ -262,19 +275,6 @@ async.waterfall([
         // Configure this global object
 
         Host.dialbackClient = client;
-
-        // Configure the service object
-
-        log.info({name: config.name, 
-                  description: config.description, 
-                  hostname: config.hostname},
-                 "Initializing ih8it object");
-
-        ih8it.name        = config.name;
-        ih8it.description = config.description;
-        ih8it.hostname    = config.hostname;
-
-        ih8it.protocol = (config.key) ? "https" : "http";
 
         // Let Web stuff get to config
 
