@@ -22,6 +22,8 @@ var ih8it = {
 
     hostname: null,
 
+    version: "0.1.0-alpha1",
+
     description: null,
 
     protocol: "http",
@@ -42,6 +44,11 @@ var ih8it = {
             url: app.url("/"),
             description: app.description
         };
+    },
+
+    userAgent: function() {
+        var app = this;
+        return app.hostname.replace(/[\(\)<>@,;:\"\\\/\[\]\?\=\{\}\s]/g, "") + "/" + app.version + "(" + app.url("/") + " " + app.description + ")";
     }
 };
 
