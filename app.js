@@ -163,12 +163,14 @@ async.waterfall([
                 appObject = function(req, res, next) {
                     req.ih8it = ih8it;
                     res.local("ih8it", ih8it);
+                    next();
                 };
 
             app.set('views', __dirname + '/views');
             app.set('view engine', 'utml');
             app.use(requestLogger(log));
             app.use(versionStamp);
+            app.use(appObject);
             app.use(express.bodyParser());
             app.use(express.cookieParser());
             app.use(express.methodOverride());
