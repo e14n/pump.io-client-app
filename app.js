@@ -1,6 +1,6 @@
 // app.js
 //
-// main function for live updates
+// main function for h8in
 //
 // Copyright 2013, E14N https://e14n.com/
 //
@@ -260,6 +260,8 @@ async.waterfall([
         app.post('/login', userAuth, noUser, routes.handleLogin);
         app.post('/logout', userAuth, userRequired, routes.handleLogout);
         app.get('/about', userAuth, userOptional, routes.about);
+        app.get('/h8', userAuth, userRequired, routes.showH8);
+        app.post('/h8', userAuth, userRequired, routes.doH8);
         app.get('/authorized/:hostname', routes.authorized);
         app.get('/.well-known/host-meta.json', routes.hostmeta);
 

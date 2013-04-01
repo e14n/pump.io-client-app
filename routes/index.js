@@ -23,6 +23,7 @@ var wf = require("webfinger"),
     User = require("../models/user"),
     Host = require("../models/host"),
     RequestToken = require("../models/requesttoken"),
+    ActivityObject = require("../models/activityobject"),
     ih8it = require("../models/ih8it");
 
 exports.hostmeta = function(req, res) {
@@ -155,4 +156,48 @@ exports.handleLogout = function(req, res) {
     delete req.user;
 
     res.redirect("/", 303);
+};
+
+exports.showH8 = function(req, res) {
+
+    var url = req.query.url;
+
+    async.waterfall([
+        function(callback) {
+            ActivityObject.ensure(url, callback);
+        }
+    ], function(err, aobj) {
+        if (err) {
+            next(err);
+        } else {
+            res.render("h8", {title: "h8 this", url: url, aobj: aobj});
+        }
+    });
+};
+
+exports.doH8 = function(req, res, next) {
+
+    var user = req.user,
+        url = req.body.url;
+
+    async.waterfall([
+        function(callback) {
+            ActivityObject.ensure(url, callback);
+        },
+        function(aobj, callback) {
+            var now = new Date();
+            user.postActivity({
+                verb: "dislike",
+                object: aobj,
+                published: now.toISOString()
+            });
+        }
+    ], function(err, aobj) {
+        if (err) {
+            next(err);
+        } else {
+            // XXX: show indicator that h8 happened
+            res.redirect("/", 303);
+        }
+    });
 };
