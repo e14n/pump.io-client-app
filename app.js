@@ -256,7 +256,7 @@ async.waterfall([
             hostname: config.hostname,
             app: app,
             bank: db,
-            userAgent: "ih8.it/"+version
+            userAgent: ih8it.userAgent()
         });
 
         // Configure this global object
