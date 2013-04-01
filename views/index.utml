@@ -8,7 +8,7 @@
 
         <p>h8rz gonna h8.</p>
 
-        <p><a href="/login">Start h8in&apos;</a></p>
+        <p><a class="btn btn-primary" href="/login">Start h8in&apos; &raquo;</a></p>
 
       </div>
       
