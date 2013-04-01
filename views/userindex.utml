@@ -4,8 +4,10 @@
 
   <form class="form-inline" action="/h8" method="get">
     <label class="control-label" for="url">URL</label>
-    <input type="text" class="input-small" id="url" placeholder="http://something.example/page1">
-    <button type="submit" class="btn">h8</button>
+    <div class="input-append">
+      <input class="span6 input-xxlarge"  id="url" name="url" type="text">
+      <button class="btn btn-xxlarge" type="submit">h8!</button>
+    </div>
   </form>
 
 </div>
