@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="span12">
+    <h1><%- aobj.displayName %> <small><%- aobj.objectType %></small></h1>
+    <% if (aobj.summary) { %>
+    <p><%- aobj.summary %></p>
+    <% } %>
+  </div>
+  <form action="/h8" method="post">
+    <input type="hidden" name="url" value="<%- aobj.url %>">
+    <button class="btn btn-xxlarge" type="submit">h8!</button>
+  </form>
+</div>
