@@ -70,6 +70,19 @@ log = new Logger(logParams);
 
 log.info("Initializing");
 
+// Configure the service object
+
+log.info({name: config.name, 
+          description: config.description, 
+          hostname: config.hostname},
+         "Initializing ih8it object");
+
+ih8it.name        = config.name;
+ih8it.description = config.description;
+ih8it.hostname    = config.hostname;
+
+ih8it.protocol = (config.key) ? "https" : "http";
+
 if (!config.params) {
     if (config.driver == "disk") {
         config.params = {dir: "/var/lib/ih8.it/"};
@@ -249,19 +262,6 @@ async.waterfall([
         app.get('/about', userAuth, userOptional, routes.about);
         app.get('/authorized/:hostname', routes.authorized);
         app.get('/.well-known/host-meta.json', routes.hostmeta);
-
-        // Configure the service object
-
-        log.info({name: config.name, 
-                  description: config.description, 
-                  hostname: config.hostname},
-                 "Initializing ih8it object");
-
-        ih8it.name        = config.name;
-        ih8it.description = config.description;
-        ih8it.hostname    = config.hostname;
-
-        ih8it.protocol = (config.key) ? "https" : "http";
 
         // Create a dialback client
 
