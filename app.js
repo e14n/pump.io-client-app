@@ -164,7 +164,12 @@ async.waterfall([
                 versionStamp = function(req, res, next) {
                     res.setHeader('Server', serverVersion);
                     next();
+                },
+                appObject = function(req, res, next) {
+                    req.ih8it = ih8it;
+                    res.local("ih8it", ih8it);
                 };
+
             app.set('views', __dirname + '/views');
             app.set('view engine', 'utml');
             app.use(requestLogger(log));
