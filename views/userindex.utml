@@ -7,7 +7,7 @@
 
     <p>Drag this bookmarklet button to your bookmarks toolbar to h8 things as you roam around the web.</p>
 
-    <p><a class="btn" href="javascript:document.location='https://ih8.it/h8?url='+encodeURIComponent(document.location);">h8 it</a></p>
+    <p><a class="btn" href="javascript:document.location='https://ih8.it/h8?src=button&url='+encodeURIComponent(document.location);">h8 it</a></p>
 
   </div>
 

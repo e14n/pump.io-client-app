@@ -158,9 +158,10 @@ exports.handleLogout = function(req, res) {
     res.redirect("/", 303);
 };
 
-exports.showH8 = function(req, res) {
+exports.showH8 = function(req, res, next) {
 
-    var url = req.query.url;
+    var url = req.query.url,
+        src = req.query.src;
 
     async.waterfall([
         function(callback) {
@@ -170,7 +171,7 @@ exports.showH8 = function(req, res) {
         if (err) {
             next(err);
         } else {
-            res.render("h8", {title: "h8 this", url: url, aobj: aobj});
+            res.render("h8", {title: "h8 this", url: url, src: src, aobj: aobj});
         }
     });
 };
@@ -178,6 +179,7 @@ exports.showH8 = function(req, res) {
 exports.doH8 = function(req, res, next) {
 
     var user = req.user,
+        src = req.body.src,
         url = req.body.url;
 
     async.waterfall([
@@ -196,8 +198,12 @@ exports.doH8 = function(req, res, next) {
         if (err) {
             next(err);
         } else {
-            // XXX: show indicator that h8 happened
-            res.redirect("/", 303);
+            if (src == "button") {
+                res.redirect(url, 303);
+            } else {
+                // XXX: show indicator that h8 happened
+                res.redirect("/", 303);
+            }
         }
     });
 };
