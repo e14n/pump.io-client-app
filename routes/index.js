@@ -190,9 +190,9 @@ exports.doH8 = function(req, res, next) {
                 verb: "dislike",
                 object: aobj,
                 published: now.toISOString()
-            });
+            }, callback);
         }
-    ], function(err, aobj) {
+    ], function(err, posted) {
         if (err) {
             next(err);
         } else {
