@@ -1,4 +1,4 @@
-<div class="hero-unit">
+<div>
 
   <h1><%- user.name %> <small><%- user.id %></small></h1>
 
