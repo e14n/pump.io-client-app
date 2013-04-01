@@ -1,20 +1,5 @@
 <div class="hero-unit">
 
-  <h1>Welcome <%- user.name %>!</h1>
+  <h1><%- user.name %> <small><%- user.id %></small></h1>
 
-  <p>It&apos;s the stats server for the social web.</p>
-
-</div>
-
-<div class="row">
-  <div class="span4">
-  <h2>Number of hosts</h2>
-
-  <p><%- hosts %></p>
-  </div>
-  <div class="span4">
-  <h2>Number of users</h2>
-
-  <p><%- users %></p>
-  </div>
 </div>
