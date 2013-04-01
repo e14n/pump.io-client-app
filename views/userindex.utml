@@ -3,6 +3,16 @@
   <h1><%- user.name %> <small><%- user.id %></small></h1>
 
   <div class="span12">
+    <h2>h8 button</h2>
+
+    <p>Drag this bookmarklet button to your bookmarks toolbar to h8 things as you roam around the web.</p>
+
+    <p><a class="btn" href="javascript:document.location='https://ih8.it/h8?url='+encodeURIComponent(document.location);">h8 it</a></p>
+
+  </div>
+
+  <div class="span12">
+    <h2>h8 form</h2>
     <form class="form-inline" action="/h8" method="get">
       <label class="control-label" for="url">URL</label>
       <div class="input-append">
