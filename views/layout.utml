@@ -44,7 +44,7 @@
       <hr>
 
       <footer>
-        <%- app.name %> is brought to you by <a href="http://e14n.com/">E14N</a>, because we think you&apos;re awesome.
+        <%- ih8it.name %> is brought to you by <a href="http://e14n.com/">E14N</a>, because we think you&apos;re awesome.
       </footer>
 
     </div> <!-- /container -->
