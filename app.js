@@ -32,10 +32,7 @@ var fs = require("fs"),
     RequestToken = require("./models/requesttoken"),
     User = require("./models/user"),
     Host = require("./models/host"),
-    HostCount = require("./models/hostcount"),
-    TotalCount = require("./models/totalcount"),
     ih8it = require("./models/ih8it"),
-    Updater = require("./lib/updater"),
     config,
     defaults = {
         port: 4000,
@@ -100,8 +97,6 @@ _.each([RequestToken, Host], function(Cls) {
 
 _.extend(config.params.schema, User.schema);
 _.extend(config.params.schema, Host.schema);
-_.extend(config.params.schema, HostCount.schema);
-_.extend(config.params.schema, TotalCount.schema);
 
 var db = Databank.get(config.driver, config.params);
 
@@ -294,15 +289,6 @@ async.waterfall([
                 log.info(obj);
             }
         };
-
-        // updater -- keeps the world up-to-date
-        // XXX: move to master process when clustering
-
-        log.info("Initializing updater");
-
-        app.updater = new Updater({log: log});
-
-        app.updater.start();
 
         // Start the app
 
