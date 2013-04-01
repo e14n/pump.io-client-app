@@ -47,15 +47,15 @@ var fs = require("fs"),
     },
     log,
     logParams = {
-        name: "ih8it",
+        name: "ih8.it",
         serializers: {
             req: Logger.stdSerializers.req,
             res: Logger.stdSerializers.res
         }
     };
 
-if (fs.existsSync("/etc/ih8it.json")) {
-    config = _.defaults(JSON.parse(fs.readFileSync("/etc/ih8it.json")),
+if (fs.existsSync("/etc/ih8.it.json")) {
+    config = _.defaults(JSON.parse(fs.readFileSync("/etc/ih8.it.json")),
                         defaults);
 } else {
     config = defaults;
@@ -75,7 +75,7 @@ log.info("Initializing pump live");
 
 if (!config.params) {
     if (config.driver == "disk") {
-        config.params = {dir: "/var/lib/ih8it/"};
+        config.params = {dir: "/var/lib/ih8.it/"};
     } else {
         config.params = {};
     }
@@ -160,9 +160,15 @@ async.waterfall([
         log.info("Configuring app");
 
         app.configure(function(){
+            var serverVersion = 'ih8.it/'+ih8it.version + ' express/'+express.version + ' node.js/'+process.version,
+                versionStamp = function(req, res, next) {
+                    res.setHeader('Server', serverVersion);
+                    next();
+                };
             app.set('views', __dirname + '/views');
             app.set('view engine', 'utml');
             app.use(requestLogger(log));
+            app.use(versionStamp);
             app.use(express.bodyParser());
             app.use(express.cookieParser());
             app.use(express.methodOverride());
@@ -250,7 +256,7 @@ async.waterfall([
             hostname: config.hostname,
             app: app,
             bank: db,
-            userAgent: "ih8it/0.1.0"
+            userAgent: "ih8.it/"+version
         });
 
         // Configure this global object
