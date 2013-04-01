@@ -48,7 +48,7 @@ var ih8it = {
 
     userAgent: function() {
         var app = this;
-        return app.hostname.replace(/[\(\)<>@,;:\"\\\/\[\]\?\=\{\}\s]/g, "") + "/" + app.version + "(" + app.url("/") + " " + app.description + ")";
+        return app.hostname.replace(/[\(\)<>@,;:\"\\\/\[\]\?\=\{\}\s]/g, "") + "/" + app.version + " (" + app.url("/") + "; " + app.description + ")";
     }
 };
 
