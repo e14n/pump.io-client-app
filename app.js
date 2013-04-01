@@ -68,7 +68,7 @@ if (config.logfile) {
 
 log = new Logger(logParams);
 
-log.info("Initializing pump live");
+log.info("Initializing");
 
 if (!config.params) {
     if (config.driver == "disk") {
