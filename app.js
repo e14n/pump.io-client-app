@@ -30,6 +30,7 @@ var fs = require("fs"),
     DatabankObject = databank.DatabankObject,
     DatabankStore = require('connect-databank')(express),
     RequestToken = require("./models/requesttoken"),
+    RememberMe = require("./models/rememberme"),
     User = require("./models/user"),
     Host = require("./models/host"),
     ih8it = require("./models/ih8it"),
@@ -102,7 +103,7 @@ _.extend(config.params.schema, DatabankStore.schema);
 
 // Now, our stuff
 
-_.each([RequestToken, Host], function(Cls) {
+_.each([RequestToken, Host, RememberMe], function(Cls) {
     config.params.schema[Cls.type] = Cls.schema;
 });
 
@@ -188,6 +189,7 @@ async.waterfall([
             app.use(express.cookieParser());
             app.use(express.methodOverride());
             app.use(express.session({secret: (_(config).has('sessionSecret')) ? config.sessionSecret : "insecure",
+                                     cookie: {path: '/', httpOnly: true},
                                      store: dbstore}));
             app.use(app.router);
             app.use(express.static(__dirname + '/public'));
@@ -208,18 +210,61 @@ async.waterfall([
             req.user = null;
             res.local("user", null);
 
-            if (!req.session.userID) {
-                next();
-            } else {
+            if (req.session.userID) {
+                req.log.info({userID: req.session.userID}, "Logging in with session-stored user ID");
                 User.get(req.session.userID, function(err, user) {
                     if (err) {
                         next(err);
                     } else {
+                        req.log.info({userID: user.id}, "Logged in");
                         req.user = user;
                         res.local("user", user);
                         next();
                     }
                 });
+            } else if (req.cookies.rememberme) {
+                req.log.info({rememberme: req.cookies.rememberme}, "Logging in with rememberme cookie");
+                async.waterfall([
+                    function(callback) {
+                        RememberMe.get(req.cookies.rememberme, callback);
+                    },
+                    function(rm, callback) {
+                        var id = rm.user;
+                        req.log.info({rememberme: req.cookies.rememberme, userID: id}, "Found rememberme cookie");
+                        async.parallel([
+                            function(callback) {
+                                rm.del(callback);
+                            },
+                            function(callback) {
+                                User.get(id, callback);
+                            },
+                            function(callback) {
+                                RememberMe.create({user: id}, callback);
+                            }
+                        ], callback);
+                    }
+                ], function(err, results) {
+                    var rm, user;
+                    if (err) {
+                        next(err);
+                    } else {
+
+                        user = results[1];
+                        rm = results[2];
+
+                        req.user = user;
+                        res.local("user", req.user);
+                        req.session.userID = req.user.id;
+                        req.log.info({userID: req.user.id}, "Set user");
+
+                        res.cookie("rememberme", rm.uuid, {path: "/", expires: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000), httpOnly: true});
+                        req.log.info({rememberme: rm.uuid, userID: req.user.id}, "Set rememberme cookie");
+
+                        next();
+                    }
+                });
+            } else {
+                next();
             }
         };
 

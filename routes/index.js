@@ -23,6 +23,7 @@ var wf = require("webfinger"),
     User = require("../models/user"),
     Host = require("../models/host"),
     RequestToken = require("../models/requesttoken"),
+    RememberMe = require("../models/rememberme"),
     ActivityObject = require("../models/activityobject"),
     ih8it = require("../models/ih8it");
 
@@ -58,9 +59,12 @@ exports.login = function(req, res) {
 exports.handleLogin = function(req, res, next) {
 
     var id = req.body.webfinger,
+        rememberme = req.body.rememberme,
         hostname = User.getHostname(id),
         host;
-    
+
+    req.log.info(req.body, "Handling login");
+
     async.waterfall([
         function(callback) {
             Host.ensureHost(hostname, callback);
@@ -77,6 +81,8 @@ exports.handleLogin = function(req, res, next) {
                 next(new Error(err.data));
             }
         } else {
+            // Remember if the user asked for a rememberme cookie
+            req.session.remembermeChecked = (rememberme == "on");
             res.redirect(host.authorizeURL(rt));
         }
     });
@@ -93,6 +99,7 @@ exports.authorized = function(req, res, next) {
         token_secret,
         id,
         object,
+        user,
         newUser = false;
 
     async.waterfall([
@@ -139,12 +146,31 @@ exports.authorized = function(req, res, next) {
                     callback(null, user);
                 }
             });
+        },
+        function(results, callback) {
+            user = results;
+            if (req.session.remembermeChecked) {
+                req.log.info("Setting rememberme cookie");
+                RememberMe.create({user: user.id}, function(err, rm) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        req.log.info({rm: rm}, "Created rememberme record");
+                        res.cookie("rememberme", rm.uuid, {path: "/", expires: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000), httpOnly: true});
+                        req.log.info({rememberme: rm.uuid}, "Set rememberme cookie");
+                        callback(null);
+                    }
+                });
+            } else {
+                callback(null);
+            }
         }
-    ], function(err, user) {
+    ], function(err) {
         if (err) {
             next(err);
         } else {
             req.session.userID = user.id;
+            delete req.session.remembermeChecked;
             res.redirect("/");
         }
     });
@@ -153,7 +179,10 @@ exports.authorized = function(req, res, next) {
 exports.handleLogout = function(req, res) {
 
     delete req.session.userID;
+    delete req.session.remembermeChecked;
     delete req.user;
+
+    res.clearCookie("rememberme");
 
     res.redirect("/", 303);
 };
