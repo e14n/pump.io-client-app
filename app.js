@@ -40,8 +40,9 @@ var fs = require("fs"),
         address: "localhost",
         hostname: "localhost",
         driver: "disk",
-        name: "Pump Live",
-        description: "Stats server for the social web."
+        name: "ih8.it",
+        description: "Widget for hating things on the federated social web.",
+        verb: "dislike"
     },
     log,
     logParams = {

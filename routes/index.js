@@ -218,7 +218,7 @@ exports.doH8 = function(req, res, next) {
         function(aobj, callback) {
             var now = new Date();
             user.postActivity({
-                verb: "dislike",
+                verb: req.app.config.verb,
                 object: aobj,
                 published: now.toISOString()
             }, callback);
