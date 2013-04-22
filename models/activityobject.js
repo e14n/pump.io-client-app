@@ -178,6 +178,8 @@ ActivityObject.discover = function(url, callback) {
 
 ActivityObject.discoverOpenGraph = function(url, callback) {
 
+    var props;
+
     async.waterfall([
         function(callback) {
             ActivityObject.httpGet(url, callback);
@@ -186,8 +188,10 @@ ActivityObject.discoverOpenGraph = function(url, callback) {
             jsdom.env({html: body, url: url, done: callback});
         },
         function(window, callback) {
-	    var ogData = ActivityObject.parseOGP(window),
-                props = {url: url};
+	    var ogData = ActivityObject.parseOGP(window);
+
+            props = {url: url};
+
             if (_.isEmpty(ogData)) {
                 _.extend(props, {
                     objectType: "page",
@@ -256,7 +260,15 @@ ActivityObject.discoverOpenGraph = function(url, callback) {
             }
             ActivityObject.create(props, callback);
         }
-    ], callback);
+    ], function(err, aobj) {
+        if (err && err.name == "AlreadyExistsError") { // sheesh
+            ActivityObject.get(props.url, callback);
+        } else if (err) {
+            callback(err, null);
+        } else {
+            callback(null, aobj);
+        }
+    });
 };
 
 // From node-ogp 0.0.2
