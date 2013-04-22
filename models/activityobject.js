@@ -44,6 +44,10 @@ ActivityObject.schema = {
     indices: ["id"]
 };
 
+ActivityObject.pkey = function() {
+    return "url";
+};
+
 ActivityObject.ensure = function(url, callback) {
     ActivityObject.get(url, function(err, aobj) {
         if (err && err.name == "NoSuchThingError") {
