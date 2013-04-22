@@ -75,16 +75,16 @@ User.fromPerson = function(person, token, secret, callback) {
     async.waterfall([
         function(callback) {
             User.create({id: id,
-                           name: person.displayName,
-                           homepage: person.url,
-                           token: token,
-                           secret: secret,
-                           created: Date.now(),
-                           updated: Date.now(),
-                           inbox: person.links["activity-inbox"].href,
-                           outbox: person.links["activity-outbox"].href,
-                           followers: person.followers.url},
-                          callback);
+                         name: person.displayName,
+                         homepage: person.url,
+                         token: token,
+                         secret: secret,
+                         created: Date.now(),
+                         updated: Date.now(),
+                         inbox: person.links["activity-inbox"].href,
+                         outbox: person.links["activity-outbox"].href,
+                         followers: person.followers.url},
+                        callback);
         }
     ], callback);
 };
