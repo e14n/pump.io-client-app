@@ -177,7 +177,17 @@ User.prototype.postActivity = function(act, callback) {
                 }
             }
         }
-    ], callback);
+    ], function(err, posted) {
+        if (err) {
+            if (err instanceof Error) {
+                callback(err, null);
+            } else {
+                callback(new Error("Error " + err.statusCode + ": " + err.data), null);
+            }
+        } else {
+            callback(null, posted);
+        }
+    });
 };
 
 module.exports = User;
