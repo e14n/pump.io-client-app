@@ -1,6 +1,6 @@
 {
-    "name": "ih8.it",
-    "version": "0.1.0-alpha.2",
+    "name": "pump.io-client-app"
+    "version": "0.1.0-alpha.1",
     "dependencies": {
         "express": "2.5.x",
         "utml": "0.2.x",
@@ -13,7 +13,6 @@
         "async": "0.2.x",
         "connect-databank": "0.12.x",
         "node-uuid": "1.4.x",
-        "bunyan": "0.21.x",
-        "jsdom": "0.8.x"
+        "bunyan": "0.21.x"
     }
 }
