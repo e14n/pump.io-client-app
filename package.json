@@ -1,6 +1,7 @@
 {
     "name": "pump.io-client-app"
     "version": "0.1.0-alpha.1",
+    "main": "./lib/app.js",
     "dependencies": {
         "express": "2.5.x",
         "utml": "0.2.x",
