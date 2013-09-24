@@ -3,7 +3,7 @@
     "version": "0.1.0-alpha.1",
     "main": "./lib/app.js",
     "dependencies": {
-        "express": "2.5.x",
+        "express": "3.x",
         "utml": "0.2.x",
         "underscore": "1.4.x",
         "webfinger": "0.1.x",
