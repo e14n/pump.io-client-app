@@ -1,11 +1,3 @@
-## generic files to ignore
-*~
-*.lock
-*.DS_Store
-*.swp
-*.out
-
-## For node projects
 lib-cov
 *.seed
 *.log
@@ -19,6 +11,4 @@ pids
 logs
 results
 
-node_modules
 npm-debug.log
-config.js
