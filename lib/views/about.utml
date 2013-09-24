@@ -1,4 +1,4 @@
-<p><b><%- ih8it.name %></b> is a Web app that lets <a href="http://pump.io/">pump.io</a> users h8 things.</p>
+<p><b><%- site.name %></b> is a Web app that lets <a href="http://pump.io/">pump.io</a> users h8 things.</p>
 
 <p>If you log into the app, you can go to different Web sites and click the &quot;h8&quot; button to show your pump.io follows that you hate that thing.</p>
 
