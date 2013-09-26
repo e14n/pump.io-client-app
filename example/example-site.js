@@ -11,11 +11,5 @@ var exampleApp = new ClientApp({
     views: path.join(__dirname, "views")
 });
 
-// Add another view
-
-exampleApp.get("/about", function(req, res, next) {
-    res.render("about", {title: "About"});
-});
-
 exampleApp.run(function(err) {
 });
