@@ -1,23 +1,17 @@
-<div class="hero-unit">
+<div class="jumbotron">
 
     <div class="row">
 
-      <div class="col-md-6">
+      <div class="col-md-12">
 
-        <h1>ih8.it</h1>
+        <h1><%= site.name %></h1>
 
-        <p>h8rz gonna h8.</p>
+        <p><%= site.description %></p>
 
-        <p><a class="btn btn-primary" href="/login">Start h8in&apos; &raquo;</a></p>
+        <p><a class="btn btn-primary" href="/login">Get started &raquo;</a></p>
 
       </div>
       
-      <div class="col-md-4">
-
-        <img src="/images/Symbol_thumbs_down.svg" width="371" height="480" class="img-rounded">
-
-      </div>
-
     </div>
 
 </div>
