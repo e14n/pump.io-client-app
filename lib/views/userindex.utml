@@ -7,7 +7,7 @@
 
     <p>Drag this bookmarklet button to your bookmarks toolbar to h8 things as you roam around the web.</p>
 
-    <p><a class="btn" href="javascript:document.location='https://ih8.it/h8?src=button&url='+encodeURIComponent(document.location);">h8 it</a></p>
+    <p><a class="btn btn-default" href="javascript:document.location='https://ih8.it/h8?src=button&url='+encodeURIComponent(document.location);">h8 it</a></p>
 
   </div>
 
@@ -16,7 +16,7 @@
     <form class="form-inline" action="/h8" method="get">
       <label class="control-label" for="url">URL</label>
       <div class="input-append">
-        <input class="span6 input-xxlarge"  id="url" name="url" type="text">
+        <input class="col-md-6 input-xxlarge"  id="url" name="url" type="text">
         <button class="btn btn-xxlarge" type="submit">h8!</button>
       </div>
     </form>
