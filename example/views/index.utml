@@ -1,0 +1,3 @@
+<h1><%= site.name %></h1>
+
+<p>This is an example site that I created that has its own custom view.</p>
