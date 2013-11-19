@@ -64,6 +64,7 @@ These are the config options you can pass to the constructor.
 * `name` Name of the site. Default is "An unconfigured pump.io client".
 * `description` Description of the site. "A pump.io client that is not correctly configured.".
 * `logfile` Logfile to write to. null is the default and means write to stderr.
+* `loglevel` The minimum level to use for logging. Defaults to 'info'. Change to 'debug' for development.
 * `nologger` Set this to true to turn off logging. Defaults to false.
 * `key` Filename of the SSL key you want the server to use. Defaults to null, meaning no SSL.
 * `cert` Filename of the SSL cert to use. Defaults to null.
