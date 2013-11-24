@@ -74,6 +74,10 @@ These are the config options you can pass to the constructor.
 * `views` If you want to add your own views (and you do), name the dir here. Defaults to null.
 * `address` The address to listen on. If false-ish, will fall back to `hostname`. Default null.
 * `useCDN` Whether to use CDNJS and the Google CDN for JavaScript. Defaults to true.
+* `scripts` An array of strings that are paths of scripts you'd like to load. They'll be
+  added to the default layout in order, after jQuery and Bootstrap. Default is `[]`.
+* `styles` An array of strings that are paths of stylesheets you'd like to load. They'll be
+  added to the default layout in order, at the end of the <head> section. Default is `[]`.
 
 ## Examples
 
