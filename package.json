@@ -1,22 +1,22 @@
 {
-    "name": "pump.io-client-app",
-    "version": "0.8.0",
-    "main": "./lib/app.js",
-    "dependencies": {
-        "express": "3.x",
-        "consolidate": "0.9.x",
-        "underscore": "1.5.x",
-        "webfinger": "0.4.x",
-        "databank": "0.19.x",
-        "dialback-client": "0.2.x",
-        "oauth": "0.9.x",
-        "async": "0.2.x",
-        "connect-databank": "0.13.x",
-        "node-uuid": "1.4.x",
-        "bunyan": "0.22.x"
-    },
-    "repository": {
-        "type" : "git",
-        "url" : "http://github.com/e14n/pump.io-client-app.git"
-    }    
+  "name": "pump.io-client-app",
+  "version": "0.8.1",
+  "main": "./lib/app.js",
+  "dependencies": {
+    "async": "0.9.x",
+    "bunyan": "0.22.x",
+    "connect-databank": "0.13.x",
+    "consolidate": "0.10.x",
+    "databank": "0.19.x",
+    "dialback-client": "0.2.x",
+    "express": "~4.3.1",
+    "node-uuid": "1.4.x",
+    "oauth": "0.9.x",
+    "underscore": "1.6.x",
+    "webfinger": "0.4.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/e14n/pump.io-client-app.git"
+  }
 }
