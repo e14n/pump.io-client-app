@@ -1,6 +1,6 @@
 {
   "name": "pump.io-client-app",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "main": "./lib/app.js",
   "dependencies": {
     "async": "0.9.x",
